@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### How to run the application
 
 1. run `npm install` to install all the dependencies
-2. npm start to start the application.
+2. `npm start` to start the application.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
