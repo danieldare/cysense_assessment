@@ -11,7 +11,7 @@ type Types = {
   startDate: string;
 };
 
-interface ILeagueDetails {
+export interface ILeagueDetails {
   seasons: {
     displayName: string;
     endDate: string;
@@ -64,7 +64,11 @@ function LeagueDetails() {
             return (
               <div
                 className="legue-detail"
-                onClick={() => navigate(`/leagues/${id}/standing?${detail.year}`)}
+                onClick={() =>
+                  navigate(`/leagues/${id}/standing?${detail.year}`, {
+                    state: { name, logos, year: detail.year },
+                  })
+                }
               >
                 <h2 className="standing-display-name">{detail.displayName}</h2>
                 <div className="date-wrapper">

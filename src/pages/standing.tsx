@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Http from '../api';
+import { ILeague } from '../global.t';
 
 interface IStanding {
   name: string;
@@ -11,9 +12,13 @@ interface IStanding {
 }
 
 function Standings() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_standingsDetails, setStandingsDetails] = useState<IStanding | undefined>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();
+  const location = useLocation();
+  const { name, logos, year } = location.state as Partial<ILeague & { year: string }>;
 
   const getStandingDetails = useCallback(async () => {
     try {
@@ -32,7 +37,18 @@ function Standings() {
     getStandingDetails();
   }, [getStandingDetails]);
 
-  return <div className="container">Work in Progress</div>;
+  return (
+    <div className="container">
+      <div className="league-details">
+        <div className="leagues-image-wrapper-bg">
+          <img src={logos?.dark} alt={id} className="leagues-img" />
+        </div>
+        <h1 className="heading-text ">{name} League</h1>
+        <h1 className="heading-text ">Current Seasons {year}</h1>
+      </div>
+      Work In Progress
+    </div>
+  );
 }
 
 export default Standings;
