@@ -34,8 +34,6 @@ function LeagueDetails() {
       const response = await Http<ILeagueDetails>(`/leagues/${id}/seasons`, {
         method: 'GET',
       });
-
-      console.log('response', response);
       setLeagueDetails(response.data as unknown as ILeagueDetails);
     } catch (err) {
     } finally {
@@ -46,8 +44,6 @@ function LeagueDetails() {
   useEffect(() => {
     getLeagueDetails();
   }, [getLeagueDetails]);
-
-  console.log('location', location);
 
   return (
     <div className="container">
@@ -68,7 +64,7 @@ function LeagueDetails() {
             return (
               <div
                 className="legue-detail"
-                onClick={() => navigate(`/leagues/${detail.year}/standing`)}
+                onClick={() => navigate(`/leagues/${id}/standing?${detail.year}`)}
               >
                 <h2 className="standing-display-name">{detail.displayName}</h2>
                 <div className="date-wrapper">
