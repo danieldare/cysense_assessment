@@ -17,6 +17,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
   - I checked some of the available public using google, I was able to find something interesting `https://github.com/azharimm/football-standings-api`. 
   - I proceeded to read the documentation to know what is needed to make a request successful.
-  - I did a sketched on paper on how the User interface would look like and I followed through.
+  - I did a sketch on paper on how the User interface would look like and I followed through.
   - I used typescript with react to help check for error on complile time.
  
