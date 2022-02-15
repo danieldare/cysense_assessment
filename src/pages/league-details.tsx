@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Http from '../api';
+import { Back } from '../components/back';
 import { Spinner } from '../components/spinner';
 import { ILeague } from '../global.t';
 
@@ -47,6 +48,7 @@ function LeagueDetails() {
 
   return (
     <div className="container">
+      <Back />
       <div className="league-details">
         <div className="leagues-image-wrapper-bg">
           <img src={logos.dark} alt={id} className="leagues-img" />
@@ -63,7 +65,7 @@ function LeagueDetails() {
           leagueDetails?.seasons.map((detail) => {
             return (
               <div
-                className="legue-detail"
+                className="league-detail"
                 onClick={() =>
                   navigate(`/leagues/${id}/standing?${detail.year}`, {
                     state: { name, logos, year: detail.year },
@@ -71,6 +73,7 @@ function LeagueDetails() {
                 }
               >
                 <h2 className="standing-display-name">{detail.displayName}</h2>
+                <div className="league-year">{detail.year}</div>
                 <div className="date-wrapper">
                   <p>{new Date(detail.startDate).toDateString()}</p>
                   <p> {'=>'} </p>

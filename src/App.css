@@ -54,10 +54,17 @@ body {
 }
 
 .heading-text {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 600;
-  text-transform: capitalize;
   margin-bottom: 10px;
+}
+
+.heading-text-two {
+  font-size: 26px;
+  font-weight: 500;
+  color: #72ff5d;
+  text-decoration: underline;
+  text-align: center;
 }
 
 .brief-text {
@@ -116,13 +123,84 @@ body {
   margin: 40px auto 10px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 20px;
+  column-gap: 40px;
 }
 
-.legue-detail {
+.league-detail {
   margin: 20px 0;
   border: 1px solid greenyellow;
   padding: 15px;
   border-radius: 4px;
   cursor: pointer;
+  transition: transform 300ms ease;
+  position: relative;
+}
+
+.league-detail:hover {
+  transform: translateX(8px);
+  opacity: 6;
+}
+
+.league-year {
+  position: absolute;
+  right: -15px;
+  top: -20px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  padding: 10px;
+  background: rgb(40, 40, 40);
+}
+
+.standings-container {
+  margin: 40px auto 10px auto;
+  display: grid;
+  column-gap: 40px;
+  margin: 50px 0;
+}
+
+.standing-container {
+  display: grid;
+  grid-template-columns: 200px repeat(12, 1fr) 0fr;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #505050;
+  column-gap: 15px;
+}
+
+.stat-logo {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px 0 20px;
+}
+
+.stat-team {
+  color: #72ff5d;
+}
+
+.stat-team-detail {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stat-value {
+  color: #72ff5d;
+}
+
+.stat-team-name {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.standing-container.stat-font-small p {
+  font-size: 16px;
+}
+
+select {
+  padding: 10px;
+  background: transparent;
+  color: #72ff5d;
+  border-radius: 4px;
+  margin-left: 10px;
+  text-transform: capitalize;
 }

@@ -14,8 +14,8 @@ export async function Http<T>(url: RequestInfo, config: RequestInit): Promise<Ht
 
   return window.fetch(`${BASE_URL}${url}`, customConfig).then(async (response) => {
     const data: HttpResponse<T> = await response.json();
-    if (response.ok) return await Promise.resolve(data);
-    else return await Promise.reject({ message: 'an error occured' });
+    if (response.ok) return Promise.resolve(data);
+    else return Promise.reject({ message: 'an error occured' });
   });
 }
 
