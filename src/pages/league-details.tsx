@@ -36,7 +36,6 @@ function LeagueDetails() {
         method: 'GET',
       });
       setLeagueDetails(response.data as unknown as ILeagueDetails);
-    } catch (err) {
     } finally {
       setIsLoading(false);
     }
@@ -62,9 +61,10 @@ function LeagueDetails() {
             <Spinner />
           </div>
         ) : (
-          leagueDetails?.seasons.map((detail) => {
+          leagueDetails?.seasons.map((detail, index: number) => {
             return (
               <div
+                key={`${detail.displayName}_${index}`}
                 className="league-detail"
                 onClick={() =>
                   navigate(`/leagues/${id}/standing?${detail.year}`, {

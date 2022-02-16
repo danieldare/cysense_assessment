@@ -15,7 +15,6 @@ function Home() {
         method: 'GET',
       });
       setLeagues(response.data);
-    } catch (err) {
     } finally {
       setIsLoading(false);
     }

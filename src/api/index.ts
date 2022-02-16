@@ -9,7 +9,7 @@ export async function Http<T>(url: RequestInfo, config: RequestInit): Promise<Ht
     ...config,
 
     headers: new Headers({ 'Content-type': 'application/json' }),
-    body: JSON.stringify(config.body) as 'string' as unknown as ReadableStream<Uint8Array>,
+    body: JSON.stringify(config.body) as unknown as ReadableStream<Uint8Array>,
   };
 
   return window.fetch(`${BASE_URL}${url}`, customConfig).then(async (response) => {

@@ -31,7 +31,7 @@ interface IStanding {
 
 function Standings() {
   const [standingsDetails, setStandingsDetails] = useState<IStanding | undefined>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>();
   const { id } = useParams();
   const location = useLocation();
   const { name, logos, year } = location.state as Partial<ILeague & { year: string }>;
@@ -39,19 +39,22 @@ function Standings() {
 
   const getStandingDetails = useCallback(async () => {
     try {
-      const response = await Http<IStanding>(`/leagues/${id}/standings?season=2019&sort=${order}`, {
-        method: 'GET',
-      });
+      setIsLoading(true);
+      const response = await Http<IStanding>(
+        `/leagues/${id}/standings?season=${year}&sort=${order}`,
+        {
+          method: 'GET',
+        },
+      );
       setStandingsDetails(response.data as unknown as IStanding);
-    } catch (err) {
     } finally {
       setIsLoading(false);
     }
-  }, [id, order]);
+  }, [id, order, year]);
 
   useEffect(() => {
     getStandingDetails();
-  }, [getStandingDetails, order]);
+  }, [getStandingDetails, order, year]);
 
   function handleOrdering({ target: { value } }: ChangeEvent<HTMLSelectElement>) {
     setOrder(value);
@@ -91,6 +94,7 @@ function Standings() {
           <p>Points Per Game</p>
           <p>Overall</p>
         </div>
+
         {isLoading ? (
           <div className="spinner-container">
             <Spinner />
@@ -98,11 +102,13 @@ function Standings() {
         ) : (
           standingsDetails?.standings.map((standing, index: number) => {
             return (
-              <div className="standing-container">
+              <div className="standing-container" key={`${standing.team.name}_${index}`}>
                 <div className="stat-team-detail">
-                  <span>{index + 1}. </span>
+                  <span>
+                    {order === 'asc' ? index + 1 : standingsDetails?.standings.length - index}.{' '}
+                  </span>
                   <img
-                    src={standing?.team.logos[0].href}
+                    src={standing?.team.logos[0]?.href}
                     alt={standing.team.name}
                     className="stat-logo"
                   />
@@ -110,7 +116,7 @@ function Standings() {
                 </div>
                 {standing.stats.map((stat) => {
                   return (
-                    <div className="stat-container">
+                    <div className="stat-container" key={stat.description}>
                       <p className="stat-content">{stat.value}</p>
                     </div>
                   );
